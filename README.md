@@ -6,10 +6,10 @@ DiscordHub is a NestJS website with NestJS as the backend, allowing users to vie
 
 - Web
   - [Typescript](https://www.npmjs.com/package/typescript)
-  - [React](https://www.npmjs.com/package/react)
+  - [NextJS](https://nextjs.org/)
+  - [NestJS](https://nestjs.com/)
   - [tailwindcss](https://www.npmjs.com/package/tailwindcss)
   - [Prisma](https://www.npmjs.com/package/prisma)
-  - [NextAuth](https://www.npmjs.com/package/next-auth)
 
 <!-- GETTING STARTED DEVELOPMENT  -->
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { Input, Button, Checkbox } from "@nextui-org/react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { FcGoogle } from "react-icons/fc";
@@ -22,17 +22,17 @@ const Home = () => {
   const [variant, setVariant] = useState<Variant>("LOGIN");
   const [isLoading, setIsLoading] = useState(false);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  const router = useRouter();
-  const session = useSession();
-
-  const data = useRef<FormData>({
+  const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
     password: "",
   });
+  const router = useRouter();
+  const session = useSession();
 
   const toggleVariant = () => {
-    data.current = { name: "", email: "", password: "" };
+    setFormData({ name: "", email: "", password: "" });
+    console.log(formData);
     setVariant((prev) => (prev === "LOGIN" ? "REGISTER" : "LOGIN"));
   };
 
@@ -50,9 +50,9 @@ const Home = () => {
     if (variant === "REGISTER") {
       await axios
         .post("/api/auth/register", {
-          name: data.name,
-          email: data.email,
-          password: data.password,
+          name: formData.name,
+          email: formData.email,
+          password: formData.password,
         })
         .then(() =>
           signIn("credentials", {
@@ -81,8 +81,8 @@ const Home = () => {
 
     if (variant === "LOGIN") {
       signIn("credentials", {
-        email: data.email,
-        password: data.password,
+        email: formData.email,
+        password: formData.password,
         redirect: false,
       })
         .then((response) => {
@@ -146,14 +146,20 @@ const Home = () => {
             {variant == "REGISTER" && (
               <Input
                 label="Name"
-                onChange={(e) => (data.current.name = e.target.value)}
+                value={formData.name}
+                onChange={(e) => {
+                  setFormData({ ...formData, name: e.target.value });
+                }}
               />
             )}
             <Input
               label="Email"
               type="email"
               autoComplete="off"
-              onChange={(e) => (data.current.email = e.target.value)}
+              value={formData.email}
+              onChange={(e) => {
+                setFormData({ ...formData, email: e.target.value });
+              }}
             />
             <Input
               label="Password"
@@ -171,7 +177,10 @@ const Home = () => {
                 </button>
               }
               type={isPasswordVisible ? "text" : "password"}
-              onChange={(e) => (data.current.password = e.target.value)}
+              value={formData.password}
+              onChange={(e) => {
+                setFormData({ ...formData, password: e.target.value });
+              }}
             />
 
             <div className="flex items-center justify-between">
@@ -188,7 +197,7 @@ const Home = () => {
                 isLoading={isLoading}
                 variant="solid"
                 className="bg-[#0544b5] text-white font-semibold hover:bg-[#0070e0]"
-                onClick={() => onSubmit(data.current)}
+                onClick={() => onSubmit(formData)}
               >
                 {variant === "LOGIN" ? "Sign in" : "Register"}
               </Button>
