@@ -105,6 +105,13 @@ const Home = () => {
     }
   };
 
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      onSubmit(formData);
+    }
+  };
+
   const providerButtons = (provider: "google" | "github") => {
     setIsLoading(true);
 
@@ -150,6 +157,7 @@ const Home = () => {
                 onChange={(e) => {
                   setFormData({ ...formData, name: e.target.value });
                 }}
+                onKeyPress={(e) => handleKeyPress(e)}
               />
             )}
             <Input
@@ -160,6 +168,7 @@ const Home = () => {
               onChange={(e) => {
                 setFormData({ ...formData, email: e.target.value });
               }}
+              onKeyPress={(e) => handleKeyPress(e)}
             />
             <Input
               label="Password"
@@ -181,15 +190,14 @@ const Home = () => {
               onChange={(e) => {
                 setFormData({ ...formData, password: e.target.value });
               }}
+              onKeyPress={(e) => handleKeyPress(e)}
             />
 
             <div className="flex items-center justify-between">
               <Checkbox defaultSelected>Remember me</Checkbox>
-              <Link href="/forgot-password">
-                <button className="text-sm font-semibold text-[#0070e0] hover:underline">
-                  Forgot password?
-                </button>
-              </Link>
+              <button className="text-sm font-semibold text-[#0070e0] hover:underline">
+                <Link href="/forgot-password">Forgot password?</Link>
+              </button>
             </div>
             <div>
               <Button
