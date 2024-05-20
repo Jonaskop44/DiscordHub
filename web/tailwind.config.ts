@@ -9,7 +9,14 @@ const config: Config = {
     "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        "hero-custom-gradient": "linear-gradient(118deg, #8ac9ff, #a7baff)",
+      },
+      textColor: {
+        gradient: "transparent",
+      },
+    },
   },
   darkMode: "class",
   plugins: [nextui()],
