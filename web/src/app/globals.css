@@ -13,3 +13,42 @@ body,
   height: 100%;
   scroll-behavior: smooth;
 }
+
+.wrap {
+  perspective: 800px;
+  min-width: 38rem;
+  transition: all 800ms cubic-bezier(0.5, 0, 0.25, 0.96);
+  z-index: 20;
+}
+
+.hero-ui:hover .wrap {
+  perspective: 2400px;
+}
+
+.wrap:first-child img {
+  transform: rotateY(10deg) translateZ(-2rem) translateX(10rem);
+  box-shadow: -12px 12px 25px -5px #0b0d10e0;
+  transition: all 800ms cubic-bezier(0.5, 0, 0.25, 0.96);
+}
+
+.wrap:last-child img {
+  transform: rotateY(-15deg) translateZ(-2rem) translateX(-15.5rem)
+    translateY(8.5rem);
+  box-shadow: 0px 0px 25px 0px #101113;
+  transition: all 800ms cubic-bezier(0.5, 0, 0.25, 0.96);
+}
+
+.wrap:first-child:hover img {
+  scale: 1.2;
+}
+
+.wrap:last-child:hover img {
+  scale: 1.2;
+  translate: 0 -20px;
+}
+
+.wrap:first-child:hover + .wrap img {
+  scale: 0.6;
+  translate: 0 120px;
+  opacity: 1;
+}

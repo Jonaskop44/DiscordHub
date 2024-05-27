@@ -16,6 +16,9 @@ const config: Config = {
       textColor: {
         gradient: "transparent",
       },
+      maxWidth: {
+        "hero-ui": "min(85%, 1600px)",
+      },
     },
   },
   darkMode: "class",
